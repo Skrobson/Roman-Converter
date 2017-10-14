@@ -14,19 +14,14 @@ import java.util.regex.*;
  * Responsible for validation roman digits expression
  */
 public class RomanNumberValidator {
+    /**regular expresion for validation roman number format*/
+     private final String romanRegex = "^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$";
     
-    final private String romanRegex = "^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$";
+    /**A compiled representation of a regular expression. */
+    private final Pattern pattern = Pattern.compile(romanRegex);
     
-    private Pattern pattern;
-    
-   
-    
-    public RomanNumberValidator(){
-        
-        pattern = Pattern.compile(romanRegex);
-    }
-    
-    /**
+ 
+    /**i
      * Checks is string have valid roman number format
      * @param number roman number to validation
      * @return true if string is valid roman number

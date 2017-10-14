@@ -5,16 +5,19 @@
  */
 package romanconverter;
 
-import java.io.*;
+
 import java.util.Scanner;
 
 /**
  *
  * @author Skrobol Bartłomiej
  * @version 1.0
+ * 
+ * Responsible for comunication whith user
  */
 public class ConsoleView {
     
+    /**For getting input from user */
     private final Scanner scanner;
     
     public ConsoleView(){

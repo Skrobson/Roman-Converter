@@ -15,6 +15,7 @@ import java.util.*;
  */
 public class RomanNumberConverter {
     
+    /**Dictionary for roman digits*/
     private final Map<Character, Integer> digits;
     {
         digits = new HashMap<>();

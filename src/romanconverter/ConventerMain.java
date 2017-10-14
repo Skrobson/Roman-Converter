@@ -19,15 +19,15 @@ public class ConventerMain {
      *
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        Controler controler = null;
+        
+        Controler controler = new Controler();
     
         
        try{           
-            controler = new Controler(args[0]);
+            controler.run(args[0]);
         }
         catch(ArrayIndexOutOfBoundsException e){
-            controler = new Controler();
+            controler.run();
         }
         
         controler.run();           
