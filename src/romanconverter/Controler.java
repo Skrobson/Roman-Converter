@@ -13,29 +13,32 @@ package romanconverter;
  * Works in loop while user type a roman number in valid format
  */
 public class Controler {
+    /**For interaction whith user */
     private ConsoleView view = new ConsoleView();
+    
+    /**For converting roman number*/
     private RomanNumberConverter converter = new RomanNumberConverter();
-    private String numberToConvert = null;
-
-    public Controler(String romanNumber){
-        numberToConvert = romanNumber;
-    }
-    
-    public Controler(){
-        
-    }
-    
+ 
     /**
      * run controler in loop while user type romanNumber in valid format
+     * after calling app will ask for input
      */
     public void run(){
         
+        view.printMessage("Please type roman number");
+        String numberToConvert = view.getInput();
+        run(numberToConvert);
+               
+    }
+    
+    /**run controler in loop while user type romanNumber in valid format*/
+    public void run(String numberToConvert){
         Integer result = null;
-        
+
         do{
             if(numberToConvert == null){
-                view.printMessage("Please type roman number");
-                numberToConvert = view.getInput();
+               view.printMessage("Please type roman number");
+               numberToConvert = view.getInput(); 
             }
             try{
            result = converter.convert(numberToConvert);
@@ -47,8 +50,7 @@ public class Controler {
             
         }while(result == null);
         
-        view.printResult(numberToConvert,result);        
-    }
-            
+        view.printResult(numberToConvert,result); 
+    }       
 }
 
