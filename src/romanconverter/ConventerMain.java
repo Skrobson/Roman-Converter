@@ -15,7 +15,7 @@ import java.io.IOException;
 public class ConventerMain {
 
     /**
-     * @param args the command line arguments
+     * @param args the command line argument should be roman number
      *
      */
     public static void main(String[] args) {
