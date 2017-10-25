@@ -29,7 +29,7 @@ public class ConventerMain {
             controler.run();
         }
         
-        controler.run();           
+                  
     }
     
 }

@@ -56,8 +56,8 @@ public class RomanNumberConverter {
        int previousDigit = 0;
        int digitRepetition = 0;
        
-       for(int i =0; i<number.length();i++){
-           Character romanDigit = number.charAt(i);
+       for(Character romanDigit : number.toCharArray()){
+
            if(romanDigit == null)          
                throw new RomanNumberFormatException("unexceptet character in roman number");
            

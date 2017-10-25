@@ -45,13 +45,12 @@ public class Controler {
                numberToConvert = view.getInput(); 
             }
             try{
-           result = converter.convert(numberToConvert);
-        }
-        catch(RomanNumberFormatException exception){
-            view.showErrorMessage(exception.getMessage());
-            numberToConvert = null;
-        }
-            
+                result = converter.convert(numberToConvert);
+            }
+            catch(RomanNumberFormatException exception){
+                view.showErrorMessage(exception.getMessage());
+                numberToConvert = null;
+            }    
         }while(result == null);
         
         view.printResult(numberToConvert,result); 
