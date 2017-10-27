@@ -20,7 +20,7 @@ public class RomanValidatorTest {
     
    
     @Test
-    public void shouldDontPassValidation(){
+    public void invalidNumberFormat(){
         
         
         String number = "kk";
@@ -28,9 +28,10 @@ public class RomanValidatorTest {
     }
     
     @Test
-    public void shouldPassValidation(){
+    public void validNumberFormat(){
     
         String number = "III";
         Assert.assertTrue(validator.checkNumber(number));
-}
+    }
+ 
 }
