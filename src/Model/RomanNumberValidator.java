@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Model;
 
 import java.util.regex.*;
 
 /**
- *
+ * Responsible for validation roman digits expression
  * @author Skrobol Bartłomiej
  * @version 1.0
- * Responsible for validation roman digits expression
  */
 public class RomanNumberValidator {
     /**regular expresion for validation roman number format*/

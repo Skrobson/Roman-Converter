@@ -5,8 +5,8 @@ import Model.*;
 
 import org.junit.*;
 /**
- *
  * @author Skrool Bartłomiej
+ * @version 1.0
  */
 public class ConverterTest {
     RomanNumberConverter converter = new RomanNumberConverter();

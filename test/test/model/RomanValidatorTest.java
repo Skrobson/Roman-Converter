@@ -11,7 +11,6 @@ import org.junit.Assert;
 
 
 /**
- *
  * @author Skrobol Bartłomiej
  * @version 1.0
  */
