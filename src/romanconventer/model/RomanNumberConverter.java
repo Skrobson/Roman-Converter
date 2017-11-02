@@ -11,16 +11,16 @@ import java.util.*;
 public class RomanNumberConverter {
     
     /**Dictionary for roman digits*/
-    private final Map<Character, Integer> digits;
+    private final Map<Character, Integer> DIGITS;
     {
-        digits = new HashMap<>();
-        digits.put('M', 1000);
-        digits.put('D', 500);
-        digits.put('C', 100);
-        digits.put('L', 50);
-        digits.put('X', 10);
-        digits.put('V', 5);
-        digits.put('I', 1);
+        DIGITS = new HashMap<>();
+        DIGITS.put('M', 1000);
+        DIGITS.put('D', 500);
+        DIGITS.put('C', 100);
+        DIGITS.put('L', 50);
+        DIGITS.put('X', 10);
+        DIGITS.put('V', 5);
+        DIGITS.put('I', 1);
     }
     /**
      * Convert roman number string to arabic number
@@ -56,7 +56,7 @@ public class RomanNumberConverter {
            if(romanDigit == null)          
                throw new RomanNumberFormatException("unexceptet character in roman number");
            
-           int digit = digits.get(romanDigit);
+           int digit = DIGITS.get(romanDigit);
            
            if(digit == previousDigit )
                ++digitRepetition;
