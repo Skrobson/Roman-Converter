@@ -1,7 +1,8 @@
 
 package test.model;
 
-import Model.*;
+import romanconventer.model.RomanNumberFormatException;
+import romanconventer.model.RomanNumberConverter;
 
 import org.junit.*;
 /**

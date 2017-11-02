@@ -1,8 +1,9 @@
 
-package Controler;
+package romanconventer.controler;
 
-import View.*;
-import Model.*;
+import romanconventer.model.RomanNumberFormatException;
+import romanconventer.model.RomanNumberConverter;
+import romanconventer.view.ConsoleView;
 
 
 /**

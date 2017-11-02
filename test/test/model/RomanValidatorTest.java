@@ -5,7 +5,7 @@ package test.model;
 import org.junit.*;
 import java.util.*;
 
-import Model.RomanNumberValidator;
+import romanconventer.model.RomanNumberValidator;
 import org.junit.Assert;
 
 

@@ -1,5 +1,5 @@
 
-package Model;
+package romanconventer.model;
 
 /**
  * Signals that a method has been invoked with param in wrong format
