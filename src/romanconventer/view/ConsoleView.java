@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class ConsoleView {
     
     /**For getting input from user */
-    private final Scanner scanner;
+    private  Scanner scanner;
     
     public ConsoleView(){
         
