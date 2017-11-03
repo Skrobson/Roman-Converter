@@ -1,16 +1,39 @@
 
 package test.model;
 
+import java.util.*;
 import romanconventer.model.RomanNumberFormatException;
 import romanconventer.model.RomanNumberConverter;
 
 import org.junit.*;
+
 /**
  * @author Skrool Bartłomiej
  * @version 1.0
  */
 public class ConverterTest {
     RomanNumberConverter converter = new RomanNumberConverter();
+    
+    private static Map<String,Integer> testNumbers;
+    
+    @BeforeClass
+    public static void preparetestNumbers(){
+        testNumbers = new TreeMap<>();
+        
+        testNumbers.put("iii",3);
+        testNumbers.put("ViiI",8);
+        testNumbers.put("IX",9);
+        testNumbers.put("XVI",16);
+        testNumbers.put("XXX",30);
+        testNumbers.put("LII",52);
+        testNumbers.put("LXXXIX",89);
+        testNumbers.put("CCLI",251);
+        testNumbers.put("cd",400);
+        testNumbers.put("DX",510);
+        testNumbers.put("MMLXXXIX",2089);
+        testNumbers.put("MMMXXX",3030);
+        
+    }
     
     @Test(expected = RomanNumberFormatException.class)
     public void exceptionTest()throws RomanNumberFormatException{
@@ -20,13 +43,19 @@ public class ConverterTest {
     
     
     @Test
-    public void validNumber(){
-        String validNr = "XXXIII";
+    public void validNumbers(){
         
-        try {
-            Assert.assertEquals(33, converter.convert(validNr));
-        } catch (RomanNumberFormatException ex) {
-           
+        
+        
+        for(String romanNumber : testNumbers.keySet()){
+            int convertedNr = 0;
+            try{
+                convertedNr = converter.convert(romanNumber);
+            }
+            catch(RomanNumberFormatException e){
+                
+            }
+            Assert.assertEquals(romanNumber, (int)testNumbers.get(romanNumber), convertedNr);
         }
     }
 }
