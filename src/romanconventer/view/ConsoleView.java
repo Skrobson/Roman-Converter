@@ -2,14 +2,15 @@
 package romanconventer.view;
 
 
+import java.io.Closeable;
 import java.util.Scanner;
 
 /**
  * Responsible for comunication whith user
  * @author Skrobol Bartłomiej
- * @version 1.0
+ * @version 2.0
  */
-public class ConsoleView {
+public class ConsoleView implements Closeable {
     
     /**For getting input from user */
     private  Scanner scanner;
@@ -53,6 +54,14 @@ public class ConsoleView {
         System.err.println(error); 
     }
     
+    
+    /**
+     * Implementetion Closeable interface, closing input stream
+     */
+    @Override
+    public void close(){
+        scanner.close();
+    }
     
   
 }

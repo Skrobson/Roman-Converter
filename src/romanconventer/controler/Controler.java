@@ -10,7 +10,7 @@ import romanconventer.view.ConsoleView;
  * Application controler.
  * Works in loop while user type a roman number in valid format
  * @author Skrobol Bartłomiej
- * @version 1.0
+ * @version 2.0
  */
 public class Controler {
     /**For interaction whith user */
@@ -50,6 +50,7 @@ public class Controler {
         }while(result == null);
         
         view.printResult(numberToConvert,result); 
+        view.close();
     }       
 }
 
