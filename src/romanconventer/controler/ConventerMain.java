@@ -3,10 +3,9 @@ package romanconventer.controler;
 
 
 /**
- *
+ * Main class, checks program arguments, run controler
  * @author Skrobol Bartłomiej
- * @version 2.0
- * Main class, checks program arguments, run controler  
+ * @version 2.0  
  */
 public class ConventerMain {
 
