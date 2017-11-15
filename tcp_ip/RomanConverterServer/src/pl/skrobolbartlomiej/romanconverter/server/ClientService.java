@@ -24,7 +24,7 @@ public class ClientService {
     /**
      *signal when server ends servise
      */
-    private boolean isEnd = false;
+    private boolean continueService = true;
     
     /**
      * socket representing connection to the client
@@ -57,16 +57,20 @@ public class ClientService {
         Message request;
         
         do{
-            try{
-                request=stream.reciveMessage();
-                handleRequest(request);
+            if(socket.isConnected()){
+                try{
+                    request=stream.reciveMessage();
+                    handleRequest(request);
+                }
+                catch(IOException ex){
+                    this.continueService = false;
+                    System.err.println(ex.getMessage());
+                }
             }
-            catch(IOException ex){
-                this.isEnd = true;
-                System.err.println(ex.getMessage());
+            else{
+                continueService = false;
             }
-            
-        }while(!this.isEnd);
+        }while(this.continueService);
         
         
     }
@@ -89,7 +93,7 @@ public class ClientService {
                 help();
                 break;
             case EXIT:
-               this.isEnd = true;
+               this.continueService = true;
                 break;
             default:
                 stream.sendMessage(new Message(UNKNOWN_COMMAND,command));

@@ -25,3 +25,6 @@ hs_err_pid*
 /dist/
 /desktop/build/
 /desktop/nbproject/private/
+/TCP_IP/RomanConverterServer/nbproject/private/
+/TCP_IP/RomanConverterServer/build/
+/TCP_IP/RomanConverterServer/dist/
