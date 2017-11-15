@@ -21,8 +21,13 @@ public class RomanNumberValidator {
      * @return true if string is valid roman number
      */
     public boolean checkNumber(String number){
-        
-        Matcher matcher = PATTERN.matcher(number.toUpperCase());
-        return matcher.matches();
+        if(number== null || number==""){
+            return false;
+        }
+        else{
+            Matcher matcher = PATTERN.matcher(number.toUpperCase());
+            return matcher.matches();
+            
+        }
     }
 }

@@ -52,6 +52,11 @@ public class ClientStream {
      */
     public Message reciveMessage() throws IOException{
         String rawData = input.readLine();
-        return Message.createFromRawData(rawData);
+        if(rawData==null){
+            return null;
+        }
+        else{
+            return Message.createFromRawData(rawData);
+        }
     }
 }

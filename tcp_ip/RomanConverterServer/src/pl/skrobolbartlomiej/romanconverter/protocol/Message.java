@@ -66,13 +66,6 @@ public class Message {
      * this method don't check correctness of raw data
      @return new Message */
     static public Message createFromRawData(String rawData){
-        //
-        if(rawData==null){
-            
-        }
-        else{
-            rawData = "";
-        }
         String[] data = rawData.split(" " , 2);
         String type = data[0].toUpperCase();
         

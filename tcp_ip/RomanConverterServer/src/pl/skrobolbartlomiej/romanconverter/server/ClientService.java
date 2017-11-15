@@ -79,7 +79,10 @@ public class ClientService {
      *@param request String with Request code and payload 
      *@return true if client exit*/
     private void handleRequest(Message request){
+        if(request == null)
+        continueService = false;
         
+        else{
         String command = request.getType();
         
         switch(command){
@@ -98,6 +101,7 @@ public class ClientService {
             default:
                 stream.sendMessage(new Message(UNKNOWN_COMMAND,command));
                 break;
+        }
         }
     }
     

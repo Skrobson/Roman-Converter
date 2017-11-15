@@ -35,6 +35,7 @@ public class RomanValidatorTest {
         validNumbersList.add("mmm");
         validNumbersList.add("CMXCIX");
         
+        
     }
     
     @BeforeClass
@@ -53,6 +54,8 @@ public class RomanValidatorTest {
         invalidNumbersList.add("mA");
         invalidNumbersList.add("mmmm");
         invalidNumbersList.add("AAAAAAA");
+        invalidNumbersList.add(null);
+        invalidNumbersList.add("");
         
     }
     
