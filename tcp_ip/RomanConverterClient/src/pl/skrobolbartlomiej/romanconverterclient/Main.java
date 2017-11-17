@@ -3,10 +3,7 @@ package pl.skrobolbartlomiej.romanconverterclient;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pl.skrobolbartlomiej.romanconverterclient.controler.ConverterClient;
 import pl.skrobolbartlomiej.romanconverterclient.view.ConsoleView;
 
