@@ -1,4 +1,4 @@
-package pl.skrobolbartlomiej.romanconverter.server;
+package pl.skrobolbartlomiej.romanconverter.protocol;
 
 import java.net.Socket;
 import java.io.*;
@@ -25,9 +25,10 @@ public class ClientStream {
     
     
     /**Create buffered input character stream and formatted output character stream
-     @param socket connected with client
-     @trows IOException when streams cannot be open'ed */
-    ClientStream(Socket socket) throws IOException{
+     * @param socket connected with client 
+     * @throws java.io.IOException  when streams cannot be open'ed
+     */
+    public ClientStream(Socket socket)throws IOException {
         this.socket = socket;
         
         output = new PrintWriter(
@@ -42,10 +43,11 @@ public class ClientStream {
     }
     
     /**Sends message to client 
-     @param Message to send*/
+     @param message to send*/
     public void sendMessage(Message message){
         output.println(message.getRawData());
     }
+    
     /**Recive message from client
      @return Message recived from client
      @throws IOException when cannot read from input stream
