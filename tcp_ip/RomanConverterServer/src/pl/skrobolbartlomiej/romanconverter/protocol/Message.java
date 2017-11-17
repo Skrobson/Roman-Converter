@@ -26,7 +26,8 @@ public class Message {
         hasPayload = true;
     }
     
-    /**Create message without payload*/
+    /**Create message without payload
+     *@param type request or response String*/
     public Message(String type){
         this.type = type.toUpperCase();
         hasPayload = false;
@@ -64,8 +65,12 @@ public class Message {
     
     /**Static factory method, create message from raw data from stream
      * this method don't check correctness of raw data
-     @return new Message */
+     * @param rawData String from stream
+     * @return new Message */
     static public Message createFromRawData(String rawData){
+        if(rawData == null){
+            rawData="";
+        }
         String[] data = rawData.split(" " , 2);
         String type = data[0].toUpperCase();
         

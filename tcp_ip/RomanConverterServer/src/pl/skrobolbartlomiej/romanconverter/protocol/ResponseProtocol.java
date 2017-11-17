@@ -14,7 +14,7 @@ public class ResponseProtocol {
     static final public String  OK = "101";
     
     /**Response with converted roman number in decimal format */
-    static final public String DECIMAL_RESULT = "101";
+    static final public String DECIMAL_RESULT = "102";
     
     /**Signal when we try to convert Roman number without previusly sended argument */
     static final public String MISSING_ARGUMENT = "403";
@@ -24,7 +24,6 @@ public class ResponseProtocol {
     
     /**Wrong format of sended roman number */
     static final public String WRONG_ROMAN_FORMAT = "401";
-    
     
     
     /**Started every line of help information */

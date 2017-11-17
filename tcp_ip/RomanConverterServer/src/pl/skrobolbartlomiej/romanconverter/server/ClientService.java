@@ -1,5 +1,6 @@
 package pl.skrobolbartlomiej.romanconverter.server;
 
+import pl.skrobolbartlomiej.romanconverter.protocol.ClientStream;
 import java.io.IOException;
 import java.net.Socket;
 import pl.skrobolbartlomiej.romanconverter.model.*;
@@ -39,12 +40,12 @@ public class ClientService {
      *
      * @param converter instance of model
      * @param socket socket representing connection to the client
-     * 
+     * @throws IOException when error occurs while creating stream
      */
     public ClientService(RomanNumberConverter converter, Socket socket)throws IOException{
         this.converter = converter;
         this.socket = socket;
-        stream = new ClientStream(socket);
+        this.stream = new ClientStream(socket);
     }
     
      /**
@@ -77,7 +78,7 @@ public class ClientService {
     
     /**Handle requests 
      *@param request String with Request code and payload 
-     *@return true if client exit*/
+     */
     private void handleRequest(Message request){
         if(request == null)
         continueService = false;
@@ -105,6 +106,8 @@ public class ClientService {
         }
     }
     
+    /**Sets number for convert and sends response
+     @param request with roman number*/
     private void setRomanNumber(Message request){
         
         if(request.hasPayload()){
@@ -119,6 +122,7 @@ public class ClientService {
         
     }    
     
+    /**converting previously snded number, send response*/
     private void convert(){
         if (isNumberSeted){
             try {
@@ -141,6 +145,7 @@ public class ClientService {
 
     }
     
+    /**Sends server commands instruction*/
     private void help(){
         HelpInstruction help = new HelpInstruction();
         

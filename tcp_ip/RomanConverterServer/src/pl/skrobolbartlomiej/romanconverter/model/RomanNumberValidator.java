@@ -15,7 +15,7 @@ public class RomanNumberValidator {
     private final Pattern PATTERN = Pattern.compile(ROMAN_DIGITS);
     
  
-    /**i
+    /**
      * Checks is string have valid roman number format
      * @param number roman number to validation
      * @return true if string is valid roman number
