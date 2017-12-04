@@ -1,6 +1,8 @@
 package pl.skrobolbartlomiej.romanconverter.model;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Convert roman number  to arabic number
@@ -21,6 +23,30 @@ public class RomanNumberConverter {
         DIGITS.put('V', 5);
         DIGITS.put('I', 1);
     }
+    
+        /**regular expresion for validation roman number format*/
+    private final String ROMAN_DIGITS = "^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$";
+    
+    /**A compiled representation of a regular expression. */
+    private final Pattern PATTERN = Pattern.compile(ROMAN_DIGITS);
+    
+ 
+    /**
+     * Checks is string have valid roman number format
+     * @param number roman number to validation
+     * @return true if string is valid roman number
+     */
+    protected boolean validNumber(String number){
+        if(number== null || number.equals("")){
+            return false;
+        }
+        else{
+            Matcher matcher = PATTERN.matcher(number.toUpperCase());
+            return matcher.matches();
+            
+        }
+    }
+    
     /**
      * Convert roman number string to arabic number
      * @param romanNumber representetion of roman number
@@ -30,9 +56,8 @@ public class RomanNumberConverter {
     public int convert(String romanNumber) throws RomanNumberFormatException{
         
         String number = romanNumber.toUpperCase();
-        RomanNumberValidator validator = new RomanNumberValidator();
         
-        if(validator.checkNumber(number))
+        if(validNumber(number))
             return calculateFromRoman(number);
         
         else
