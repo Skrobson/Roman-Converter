@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 2017-12-06, 22:22:43
+    Document   : Converter
+    Created on : 2017-12-06, 23:55:46
     Author     : Skrobol Bartłomiej
 --%>
 
@@ -9,17 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Roman Number Converter</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-         <form action="ConverterServlet">
-            Type roman number:</br>
-            <input type="text" name="romanNumber" value="" />
+        
+        <form action="ConverterServlet">
+            <p>Type roman number</p>
+            <input type="text" name="RomanNumber" value="" />
             <input type="submit" value="Convert" />   
         </form>
          <p>Number in decimal: </p>
-         <%=(request.getAttribute("result"))%>
-
+            <%=(request.getAttribute("result"))%>
+        
     </body>
 </html>
