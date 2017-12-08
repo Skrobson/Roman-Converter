@@ -31,3 +31,13 @@ hs_err_pid*
 /WebConverter/nbproject/private/
 /WebConverter/build/
 /WebConverter/dist/
+/WebConverter/lab/
+/desktop/build/
+/desktop/dist/
+/desktop/nbproject/private/
+/tcp_ip/RomanConverterClient/build/
+/tcp_ip/RomanConverterClient/dist/
+/tcp_ip/RomanConverterClient/nbproject/private/
+*/build/
+*/dist/
+*/nbproject/private/
