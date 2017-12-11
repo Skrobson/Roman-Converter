@@ -20,7 +20,8 @@
              <input type="submit" value="Convert" />   		
          </form>		
           <p>Number in decimal: </p>		
-          <%=(request.getAttribute("result"))%>		
+          <%=(request.getAttribute("result"))%>	
+          <%=getInitParameter("dbURL")%>
  		
      </body>		
  </html>

@@ -23,9 +23,34 @@
         <servlet-name>DataBaseServlet</servlet-name>
         <url-pattern>/DataBaseServlet</url-pattern>
     </servlet-mapping>
+    
+    <context-param>
+        <param-name>dbURL</param-name>
+        <param-value>jdbc:derby://localhost:1527/lab</param-value>
+    </context-param>
+    <context-param>
+        <param-name>dbLogin</param-name>
+        <param-value>lab</param-value>
+    </context-param>
+    <context-param>
+        <param-name>dbPassword</param-name>
+        <param-value>lab</param-value>
+    </context-param>
+    
+       <listener>
+	<listener-class>
+             romanconverter.servlet.ContextDBInitializer
+        </listener-class>
+   </listener>
+    
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    
+
+    
+   
+    
 </web-app>

@@ -12,24 +12,19 @@ import java.util.logging.Logger;
  * @author Skrobol Bartłomiej
  * @version 1.0
  */
-public class DatabaseConnection {
+public class HistoryDAO {
     /**Connection with database */
     private Connection connection = null;
     
-    /**The object used for executing a static SQL statement and returning the results it produces.*/
-    private Statement statement;
+
     
     /**Connect with database*/
-    public DatabaseConnection(){
+    public HistoryDAO(String url, String login, String password){
         
         
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            // z jakiegos pliku konf
-            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/lab", "lab", "lab");
-
-            
-
+            Class.forName("org.apache.derby.jdbc.ClientDriver");          
+            connection = DriverManager.getConnection(url, login, password);
 //todo error screen
         } catch (SQLException sqle) {
             System.err.println("SQL exception: " + sqle.getMessage());

@@ -1,13 +1,14 @@
 package romanconverter.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import romanconverter.database.DatabaseConnection;
+import romanconverter.database.HistoryDAO;
 import romanconverter.model.RomanNumberConverter;
 import romanconverter.model.RomanNumberFormatException;
 
@@ -22,7 +23,7 @@ public class ConverterServlet extends HttpServlet {
     
     private RomanNumberConverter converter = null;
     
-    private DatabaseConnection connection = null;
+    private HistoryDAO connection = null;
     
     /**
      *Initialize ConverterServlet
@@ -37,12 +38,12 @@ public class ConverterServlet extends HttpServlet {
             context.setAttribute(CONVERTER,converter);
         }
         
-        connection = (DatabaseConnection) context.getAttribute("Connection");
-        if (connection == null){
-            connection = new DatabaseConnection();
-            context.setAttribute("Connection",connection);
+        connection = (HistoryDAO) context.getAttribute("connection");
+        if(connection ==null){
             
         }
+        //if (connection == null){            
+        //}
     }
     
     /**
@@ -65,9 +66,10 @@ public class ConverterServlet extends HttpServlet {
                 int result = converter.convert(romanNumber);
                 request.setAttribute("result", Integer.toString(result));
                 connection.updateHistory(request.getRemoteAddr(), romanNumber, result);
-            } catch (RomanNumberFormatException ex) {
+            } catch (RomanNumberFormatException | SQLException ex) {
                 request.setAttribute("result" , ex.getMessage());
             }
+            
         }    
 
         RequestDispatcher dis = request.getRequestDispatcher("/index.jsp");
