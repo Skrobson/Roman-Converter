@@ -5,19 +5,20 @@
  */
 package romanconverter.servlet;
 
-import java.time.Clock;
-import java.util.HashSet;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import romanconverter.database.HistoryDAO;
+
 
 /**
- *Initialize connection with database
+ * Initialize connection with database
  * @author Skrobol Bartłomiej
  * @version 1.0
  */
-public class ContextDBInitializer implements ServletContextListener{
+public class ContextInitializer implements ServletContextListener{
     
     private final String URL_PARAM_NAME = "dbURL";
     
@@ -25,6 +26,7 @@ public class ContextDBInitializer implements ServletContextListener{
     
     private final String PASSWORD_PARAM_NAME = "dbPassword";
     
+    private Connection connection = null;
     /**
      * Seting up connection with database 
      * url, login, password is pulled from web descriptor
@@ -36,21 +38,33 @@ public class ContextDBInitializer implements ServletContextListener{
         String dbUrl = (String) context.getInitParameter(URL_PARAM_NAME);
         String dbLogin = (String) context.getInitParameter(LOGIN_PARAM_NAME);
         String dbPassword = (String) context.getInitParameter(PASSWORD_PARAM_NAME);
-        if(dbUrl != null && dbLogin != null && dbUrl != null){
-            HistoryDAO connection = new HistoryDAO(dbUrl,dbLogin,dbPassword); 
+        
+        if(dbUrl != null && dbLogin != null && dbPassword != null){ 
+            try {
+                Class.forName("org.apache.derby.jdbc.ClientDriver");          
+                connection = DriverManager.getConnection(dbUrl, dbLogin, dbPassword);
+                
+            } catch (SQLException | ClassNotFoundException ex) {
+              context.setAttribute("connectionError", ex.getMessage());
+            } 
             context.setAttribute("connection", connection);
-            System.out.println("Connection established");
         }
-        else System.err.println("couldnt connect to DB");
     }
 
     
     /**
      * Close connection with database
+     * @param sce this param 
+     * ServletContextEvent containing the ServletContext that is being destroyed
      */
     @Override
-    public void contextDestroyed(ServletContextEvent sce) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void contextDestroyed(ServletContextEvent sce){
+        if(connection != null){
+            try {
+                connection.close();
+            } catch (SQLException ex) {    
+            }
+        }
     }
     
 }

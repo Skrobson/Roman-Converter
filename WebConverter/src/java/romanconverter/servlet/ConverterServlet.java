@@ -1,6 +1,7 @@
 package romanconverter.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -23,8 +24,9 @@ public class ConverterServlet extends HttpServlet {
     
     private RomanNumberConverter converter = null;
     
-    private HistoryDAO connection = null;
+    private HistoryDAO history = null;
     
+    private HttpServletRequest request;
     /**
      *Initialize ConverterServlet
      */
@@ -38,12 +40,12 @@ public class ConverterServlet extends HttpServlet {
             context.setAttribute(CONVERTER,converter);
         }
         
-        connection = (HistoryDAO) context.getAttribute("connection");
-        if(connection ==null){
-            
+        Connection con =(Connection) context.getAttribute("connection");
+        if(con != null){
+            history = new HistoryDAO(con);
         }
-        //if (connection == null){            
-        //}
+    
+        
     }
     
     /**
@@ -58,25 +60,40 @@ public class ConverterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        this.request=request;
         String romanNumber = (String) request.getParameter("romanNumber");
         
         if(romanNumber!=null){
             try {
                 int result = converter.convert(romanNumber);
                 request.setAttribute("result", Integer.toString(result));
-                connection.updateHistory(request.getRemoteAddr(), romanNumber, result);
-            } catch (RomanNumberFormatException | SQLException ex) {
-                request.setAttribute("result" , ex.getMessage());
-            }
-            
-        }    
-
+                updateHistory(romanNumber,result);
+                } catch (RomanNumberFormatException ex) {
+                    request.setAttribute("result" , ex.getMessage());
+                    updateHistory(romanNumber,null);            
+                }
+            }            
+        
         RequestDispatcher dis = request.getRequestDispatcher("/index.jsp");
         dis.forward(request, response);
-        
+    }   
+    
+
+    private void updateHistory(String romanNumber, Integer result){
+        if(history != null){
+            try{
+                String ip = request.getRemoteAddr();
+                if(result == null){
+                    history.updateIncorrectConverions(ip, romanNumber);
+                }else {
+                    history.updateCorrectConverions(ip, romanNumber, result);
+                }
+            }catch (SQLException sqlex){
+                    request.setAttribute("sqlError" , sqlex.getMessage());
+            }
+        }
     }
-   
+    
     /**
      * Handles the HTTP <code>GET</code> method.
      *

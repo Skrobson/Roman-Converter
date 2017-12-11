@@ -39,7 +39,7 @@
     
        <listener>
 	<listener-class>
-             romanconverter.servlet.ContextDBInitializer
+             romanconverter.servlet.ContextInitializer
         </listener-class>
    </listener>
     
@@ -49,8 +49,6 @@
         </session-timeout>
     </session-config>
     
-
-    
-   
-    
 </web-app>
+
+
