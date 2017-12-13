@@ -1,10 +1,15 @@
 package romanconverter.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import romanconverter.database.HistoryDAO;
 
 /**
  * Geting convertion history from database end forward to history.jsp
@@ -12,7 +17,25 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0
  */
 public class ConvertionHistory extends HttpServlet {
-
+    
+    HistoryDAO history = null;
+    
+     /**
+     *Initialize ConverterServlet
+     */
+    @Override
+    public void init(){
+        
+        ServletContext context = getServletContext();
+        
+        Connection con =(Connection) context.getAttribute("connection");
+        if(con != null){
+            history = new HistoryDAO(con);
+        }
+    
+        
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -24,7 +47,18 @@ public class ConvertionHistory extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        if(history != null){
+            try{
+                request.setAttribute("correctConversions", history.getCorrectConversions());
+                request.setAttribute("incorrectConversions", history.getIncorreConversions());
+            }catch (SQLException ex){
+                request.setAttribute("error", ex.getMessage());
+            }
+        }
+        
+        RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/history.jsp");
+        dis.forward(request, response);
 
       
     }

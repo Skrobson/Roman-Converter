@@ -12,7 +12,7 @@
         </init-param>
     </servlet>
     <servlet>
-        <servlet-name>DataBaseServlet</servlet-name>
+        <servlet-name>DatabaseServlet</servlet-name>
         <servlet-class>romanconverter.servlet.ConvertionHistory</servlet-class>
     </servlet>
     <servlet-mapping>
@@ -20,8 +20,8 @@
         <url-pattern>/ConverterServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DataBaseServlet</servlet-name>
-        <url-pattern>/DataBaseServlet</url-pattern>
+        <servlet-name>DatabaseServlet</servlet-name>
+        <url-pattern>/DatabaseServlet</url-pattern>
     </servlet-mapping>
     
     <context-param>

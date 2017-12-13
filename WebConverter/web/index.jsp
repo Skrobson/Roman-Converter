@@ -30,5 +30,8 @@
             <p>Database error : 
             <c:out value = "${sqlError}"/><p>
         </c:if>
+        <form action="DatabaseServlet">        
+            <input type="submit" value="History" />        
+        </form>
      </body>		
  </html>
