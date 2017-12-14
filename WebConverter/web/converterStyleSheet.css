@@ -1,0 +1,43 @@
+/* 
+    Created on : 2017-12-13, 11:07:34
+    Author     : Skrobol Bartłomiej
+*/
+body {
+    background-color: lightblue;
+}
+
+
+  h1 {
+      font-style: italic;
+    color: black;
+    
+}
+p{
+    font-style: italic;
+}
+br{
+    font-style: italic;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: lightslategrey;
+    border: none;
+    border-radius: 25px;
+    color: black;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-style: italic;
+}
+
+ input[type=text]
+{
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed #83A4C5;
+    width: 275px;
+    outline: none;
+    padding: 0px 0px 0px 0px;
+    font-style: italic;
+}

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,13 +21,26 @@ import romanconverter.model.RomanNumberFormatException;
  */
 public class ConverterServlet extends HttpServlet {
 
-    private final String CONVERTER = "converter";
-    
+    /**
+     * Model converter 
+     */
     private RomanNumberConverter converter = null;
     
+    /**
+     * History data access object
+     */
     private HistoryDAO history = null;
     
+    /**
+     * object to assist a servlet in sending a request to the client
+     */
     private HttpServletRequest request;
+    
+    /**
+     * object to assist a servlet in sending a response to the client
+     */
+    private HttpServletResponse response;
+    
     /**
      *Initialize ConverterServlet
      */
@@ -34,11 +48,7 @@ public class ConverterServlet extends HttpServlet {
     public void init(){
         
         ServletContext context = getServletContext();
-        converter = (RomanNumberConverter) context.getAttribute(CONVERTER);
-        if (converter== null){
-            converter = new RomanNumberConverter();
-            context.setAttribute(CONVERTER,converter);
-        }
+        converter = (RomanNumberConverter) context.getAttribute("converter");
         
         Connection con =(Connection) context.getAttribute("connection");
         if(con != null){
@@ -61,24 +71,65 @@ public class ConverterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         this.request=request;
+        this.response = response;
         String romanNumber = (String) request.getParameter("romanNumber");
-        
+ 
         if(romanNumber!=null){
+            romanNumber = romanNumber.toUpperCase();
+            String presentConversion;
+            
             try {
                 int result = converter.convert(romanNumber);
-                request.setAttribute("result", Integer.toString(result));
+                presentConversion = Integer.toString(result);
                 updateHistory(romanNumber,result);
                 } catch (RomanNumberFormatException ex) {
-                    request.setAttribute("result" , ex.getMessage());
+                    presentConversion = "this is invalid number format";
                     updateHistory(romanNumber,null);            
                 }
-            }            
+              
+            request.setAttribute("romanNumber", romanNumber.toUpperCase());
+            request.setAttribute("result",presentConversion );
+            updateCookie(romanNumber,presentConversion);
+            } 
+        
+        checkCookie();
         
         RequestDispatcher dis = request.getRequestDispatcher("/index.jsp");
         dis.forward(request, response);
     }   
     
-
+    /**
+     * checks cookies for last conversion and send request to view
+     */
+    private void checkCookie(){
+        Cookie[] cookies = request.getCookies();
+        String lastConversion;
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("lastConvertion")) {
+                    lastConversion = cookie.getValue();
+                    request.setAttribute("lastConvertion", lastConversion);
+                    break;
+                }
+            }
+    }
+    
+    /*
+     * update cookie with present conversion
+     */
+    private void updateCookie(String romanNumber, String presentConversion){
+        StringBuilder cookieBuilder = new StringBuilder();
+        cookieBuilder.append(romanNumber);
+        cookieBuilder.append(" = ");
+        cookieBuilder.append(presentConversion);
+        Cookie cookie = new Cookie("lastConvertion",cookieBuilder.toString() );
+        response.addCookie(cookie);
+    }
+    
+    /**
+     * update history
+     * @param romanNumber String with roman number sended to conversion
+     * @param result Integer convertion result, null if roman number was invalid format
+     */
     private void updateHistory(String romanNumber, Integer result){
         if(history != null){
             try{

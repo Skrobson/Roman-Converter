@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import romanconverter.model.RomanNumberConverter;
 
 
 /**
@@ -20,12 +21,24 @@ import javax.servlet.ServletContextListener;
  */
 public class ContextInitializer implements ServletContextListener{
     
+    /**
+     * InitParameter url string
+     */
     private final String URL_PARAM_NAME = "dbURL";
     
+    /**
+     * InitParameter login string
+     */
     private final String LOGIN_PARAM_NAME = "dbLogin";
     
+    /**
+     * InitParameter password string
+     */
     private final String PASSWORD_PARAM_NAME = "dbPassword";
     
+    /**
+     * A connection (session) with a specific database
+     */
     private Connection connection = null;
     /**
      * Seting up connection with database 
@@ -49,6 +62,10 @@ public class ContextInitializer implements ServletContextListener{
             } 
             context.setAttribute("connection", connection);
         }
+        
+        
+            RomanNumberConverter converter = new RomanNumberConverter();
+            context.setAttribute("converter",converter);
     }
 
     

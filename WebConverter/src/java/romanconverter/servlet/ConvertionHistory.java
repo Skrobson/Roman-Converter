@@ -18,6 +18,9 @@ import romanconverter.database.HistoryDAO;
  */
 public class ConvertionHistory extends HttpServlet {
     
+     /**
+     * History data access object
+     */
     HistoryDAO history = null;
     
      /**
@@ -57,10 +60,9 @@ public class ConvertionHistory extends HttpServlet {
             }
         }
         
-        RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/history.jsp");
+        RequestDispatcher dis = request.getRequestDispatcher("history.jsp");
         dis.forward(request, response);
 
-      
     }
 
    

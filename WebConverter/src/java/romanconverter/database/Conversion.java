@@ -5,20 +5,25 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * Bean for correct conversion
- * @Skrobol Bartłomiej
+ * Bean for conversion history
+ * @author Skrobol Bartłomiej
  * @version 1.0
  */
 public class Conversion implements Serializable{
-    
+    /**user ip */
     private String ip;
     
+    /**roman number sended to convertion*/
     private String romanNumber;
     
-    private int result;
+    /**result of convertion
+     0 if roman number is invalid*/
+    private int result = 0;
     
+    /**Inform when conversion was done */
     private Timestamp timestamp;
     
+    /**Empty constructor */
     public Conversion(){
     }
     

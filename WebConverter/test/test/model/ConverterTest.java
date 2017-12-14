@@ -5,7 +5,7 @@ import romanconverter.model.* ;
 import org.junit.*;
 
 /**
- * @author Skrool BartĹ‚omiej
+ * @author Skrool Bartłomiej
  * @version 1.0
  */
 public class ConverterTest {
@@ -34,13 +34,19 @@ public class ConverterTest {
     
     @Test(expected = RomanNumberFormatException.class)
     public void exceptionTest()throws RomanNumberFormatException{
-        String testNr = ""; 
+        String testNr = "ixxse"; 
         converter.convert(testNr);  
     }
     
     @Test(expected = RomanNumberFormatException.class)
     public void nullStringTest()throws RomanNumberFormatException{
         String testNr = null; 
+        converter.convert(testNr);  
+    }
+    
+    @Test(expected = RomanNumberFormatException.class)
+    public void emptytStringTest()throws RomanNumberFormatException{
+        String testNr = ""; 
         converter.convert(testNr);  
     }
     
