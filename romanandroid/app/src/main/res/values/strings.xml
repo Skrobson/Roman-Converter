@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RomanAndroid</string>
+    <string name="convert">Convert</string>
+    <string name="romanNumber">Roman number </string>
+</resources>
